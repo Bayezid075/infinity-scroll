@@ -29,7 +29,10 @@ h1 {
 }
 .img-container {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 15px 30%;
 }
 .img-wrapper {
   width: 350px;

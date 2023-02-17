@@ -16,6 +16,8 @@ function displayPhoto() {
     Img_item.setAttribute("alt", photo.alt_description);
     Img_item.setAttribute("title", photo.alt_description);
     // put all item into img container
+    A_item.appendChild(Img_item);
+    imgContainer.appendChild(A_item);
   });
 }
 
