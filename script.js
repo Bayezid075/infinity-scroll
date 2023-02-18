@@ -1,11 +1,28 @@
 const imgContainer = document.getElementById("img-container");
 const loader = document.getElementById("loader");
 let photoArray = [];
+let ready = false;
+let photoLoadded = 0;
+let totalImages = 0;
+
+// image loading checking function
+function imgLoaded() {
+  photoLoadded = 0;
+  photoLoadded++;
+  photoLoadded;
+  if (photoLoadded === totalImages) {
+    ready = true;
+    loader.hidden = true;
+    "ready =", ready;
+  }
+}
 
 // function for display photo, create anchor an link element by dom
 
 function displayPhoto() {
   photoArray.forEach((photo) => {
+    totalImages = photoArray.length;
+    "total images", totalImages;
     // create <a> element dom
     const A_item = document.createElement("a");
     A_item.setAttribute("href", photo.links.html);
@@ -15,6 +32,9 @@ function displayPhoto() {
     Img_item.setAttribute("src", photo.urls.regular);
     Img_item.setAttribute("alt", photo.alt_description);
     Img_item.setAttribute("title", photo.alt_description);
+    // loading animation adding
+    Img_item.addEventListener("load", imgLoaded);
+
     // put all item into img container
     A_item.appendChild(Img_item);
     imgContainer.appendChild(A_item);
@@ -34,14 +54,14 @@ async function getRandomPhoto() {
 
     displayPhoto();
   } catch (error) {
-    console.log(error);
+    error;
   }
 }
 // if reached bottom of the page , load more photos
 window.addEventListener("scroll", () => {
   if (
-    window.innerHeight + window.scrollY >=
-    document.body.offsetHeight - 1000
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 &&
+    ready
   ) {
     getRandomPhoto();
   }
