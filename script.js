@@ -37,5 +37,14 @@ async function getRandomPhoto() {
     console.log(error);
   }
 }
+// if reached bottom of the page , load more photos
+window.addEventListener("scroll", () => {
+  if (
+    window.innerHeight + window.scrollY >=
+    document.body.offsetHeight - 1000
+  ) {
+    getRandomPhoto();
+  }
+});
 
 getRandomPhoto();
